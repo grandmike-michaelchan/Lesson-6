@@ -1,0 +1,59 @@
+<!-- v-on, function demonstration, add to cart button and product image changing -->
+
+<html>
+    <head>
+        <title>Product App</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    
+    <body>
+        <div class="nav-bar"></div>
+        
+        <div id = "app">
+            <div class="product">
+
+                <div class="product-image">
+                    <!-- Show socks image tag -->
+                    <img :src="image">
+                </div> 
+                <!-- Show inventory amount and status -->
+                <div class="product-info">
+                    <h1>{{product}}</h1>
+                    <p v-if="inStock">Boolean test: In Stock</p>
+                    <p v-else>Boolean test: Out of Stock la</p>
+                    <p v-if="inventory >10">Still in stock</p> 
+                    <p v-else-if="inventory <=10 && inventory > 0">Almost sold out</p>
+                    <p v-else>Out of Stock</p>
+
+                    <ul>
+                        <!-- Grap list details from main.js -->
+                        <li v-for="detail in details">{{detail}}</li>
+                    </ul>
+
+                    <!-- Change product image when mouse hover -->
+                    <div v-for="variant in variants" :key="variant.variantId">
+                        <!-- Update product pic function -->
+                        <!-- Mouse hover to check on the variantcolor -->
+                        <!-- updateProduct function is to pass image color to make change -->
+                        <!-- {{variant.variantColor}} = display ccolor option -->
+                        <p @mouseover="updateProduct(variant.variantImage)">{{variant.variantColor}}</p>
+                    </div>
+
+                    <button v-on:click="addToCart">Add to Cart</button>
+
+                    <div class="cart">
+                        <p>Cart({{cart}})</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src='main.js'></script>
+    </body>
+</html>
+
+
+
+
